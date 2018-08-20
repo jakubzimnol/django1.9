@@ -1,0 +1,21 @@
+<html>
+<head>
+    <title>django 1.9 app </title>
+</head>
+<body>
+    <h1>
+        Welcome in template!
+        <br>
+        {{title}}
+
+        {% for item in post_list %}
+            {{item.id}}<br>
+            {{item.title}}<br>
+            {{item.created}}<br>
+            <br>
+
+        {%endfor%}
+
+    </h1>
+</body>
+</html>
