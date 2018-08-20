@@ -4,18 +4,19 @@
 </head>
 <body>
     <h1>
-        Welcome in template!
-        <br>
-        {{title}}
-
+        Welcome in template!</br>
+    
+        {{title}}</br>
+    </h1>
         {% for item in post_list %}
-            {{item.id}}<br>
-            {{item.title}}<br>
-            {{item.created}}<br>
-            <br>
+            {{item.id}} </br>
+            <a href='/posts/{{item.id}}/'>{{item.title}}</a> </br>
+            <a href='{% url "posts:detail" id=item.id %}'>{{item.title}}</a> </br>
+            <a href='{{ item.get_absolute_url }}'>{{item.title}}</a> </br>
+            {{item.created}} </br>
 
         {%endfor%}
 
-    </h1>
+    
 </body>
 </html>

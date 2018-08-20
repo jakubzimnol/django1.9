@@ -5,7 +5,7 @@ from posts.models import Post
 
 class AdminModelPost(admin.ModelAdmin):
     #fieldsets = ['title','created','updated']
-    list_display = ('title','created','updated')
+    list_display = ('id','title','created','updated')
     list_display_links = ('created','updated')
     list_filter = ('created','updated')
     list_editable = ['title']
