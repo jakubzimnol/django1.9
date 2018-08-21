@@ -4,13 +4,20 @@
     </head>
     <body>
         <h1>
-            The page's title is: {{title}}<br>
+            {{title}}<br>
         </h1>
-           id: {{instance.id}} <br/>
-           title: {{instance.title}}    <br/>
-           update: {{instance.update}} <br/> 
-           created: {{instance.created}}  <br/>  
-           text: {{instance.text}}  <br/>        
+
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{%if "html_safe" in message.tags %}{{ message|safe }} {%else%} {{message}} {%endif%}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        id: {{instance.id}} <br/>
+        update: {{instance.update}} <br/> 
+        created: {{instance.created}}  <br/>  
+        text: {{instance.text}}  <br/>        
         
     </body>
 </html>
