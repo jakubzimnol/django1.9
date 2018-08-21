@@ -1,15 +1,20 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from .models import Post
-# Create your views here.
+from .forms import PostForm
 
 def post_create(request):
-    if request.user.is_authenticated():
-        context = {"title":"list"}
-    else:
-        context = {"title":"unlogged"} 
-    return render(request, "index.html", context)
-    #return HttpResponse("<h1>Post</h1>")
+    form = PostForm(request.POST or None)
+    context = {"form":form}
+    if form.is_valid():
+        instance = form.save(commit=False)
+        instance.save()
+        return HttpResponseRedirect(instance.get_absolute_url())
+
+    #if request.method == "POST":
+    #    print(request.POST.get("text"))
+    return render(request, "post_create.html", context)
+
 
 def post_detail(request, id=None):
     #instatnce = Post.objects.get_object_or_404(id=5)
@@ -27,5 +32,12 @@ def post_list(request):
 def post_delete(request):
     return HttpResponse("<h1>delete</h1>")
 
-def post_update(request):
-    return HttpResponse("<h1>update</h1>")
+def post_update(request, id=None):
+    instance = get_object_or_404(Post, id=id)
+    form = PostForm(request.POST or None, instance=instance)
+    context = {"form":form}
+    if form.is_valid():
+        instance = form.save(commit=False)
+        instance.save()
+        return HttpResponseRedirect(instance.get_absolute_url())
+    return render(request, "post_create.html", context)
