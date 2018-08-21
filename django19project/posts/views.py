@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib import messages
 from .models import Post
@@ -32,10 +32,13 @@ def post_detail(request, id=None):
 def post_list(request):
     queryset = Post.objects.all()
     context = {"post_list":queryset}
-    return render(request, "index.html", context)
+    return render(request, "post_list.html", context)
     
-def post_delete(request):
-    return HttpResponse("<h1>delete</h1>")
+def post_delete(request, id=None):
+    instance = get_object_or_404(Post, id=id)
+    instance.delete()    
+    messages.success(request, "deleted success")
+    return redirect("posts:list")
 
 def post_update(request, id=None):
     instance = get_object_or_404(Post, id=id)

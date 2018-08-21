@@ -1,15 +1,9 @@
-<html>
-    <head>
-        <title>django 1.9 app </title>
-    </head>
-    <body>
-        <h1>
-            Create file<br>
-        </h1>
-        <form method='POST' action=''> {% csrf_token %}
-           {{ form.as_p }} 
+{% extends "base.html" %}
 
-        <input type='submit' value='Create Post' action />
-       </form>
-    </body>
-</html>
+{% block content %}
+
+    <form method='POST' action=''> {% csrf_token %}
+        {{ form.as_p }} 
+    <input type='submit' value='Create Post' action />
+    </form>
+{% endblock content %}

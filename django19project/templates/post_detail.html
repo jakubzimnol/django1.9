@@ -1,23 +1,14 @@
-<html>
-    <head>
-        <title>django 1.9 app </title>
-    </head>
-    <body>
-        <h1>
-            {{title}}<br>
-        </h1>
+{% extends "base.html" %}
 
-        {% if messages %}
-        <ul class="messages">
-            {% for message in messages %}
-            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{%if "html_safe" in message.tags %}{{ message|safe }} {%else%} {{message}} {%endif%}</li>
-            {% endfor %}
-        </ul>
-        {% endif %}
-        id: {{instance.id}} <br/>
-        update: {{instance.update}} <br/> 
-        created: {{instance.created}}  <br/>  
-        text: {{instance.text}}  <br/>        
-        
-    </body>
-</html>
+{% block head_title %} 
+    {{ instance.title }} | {{ block.super }} 
+{% endblock head_title %}
+
+{% block content %}
+
+    id: {{instance.id}} <br/>
+    update: {{instance.update}} <br/>
+    created: {{instance.created}} <br/>
+    text: {{instance.text}}  <br/>
+
+{% endblock content %}}
