@@ -5,10 +5,8 @@
 {% endblock head_title %}
 
 {% block content %}
-
-    id: {{instance.id}} <br/>
-    update: {{instance.update}} <br/>
-    created: {{instance.created}} <br/>
-    text: {{instance.text}}  <br/>
-
+    <div class='col-sm-6 col-sm-offset-3'>
+        <h1> {{ title }} <small> {{ instance.created }}</small></h1>
+        {{ instance.text | linebreaks }}  <br/>
+    </div>
 {% endblock content %}}
