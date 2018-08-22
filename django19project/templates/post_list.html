@@ -7,7 +7,9 @@
     <div class="row">
         <div class='col-sm-12'>
             <div class="thumbnail">
-                <!--img src="..." alt="..."-->
+                {% if item.image %}
+                    <img src='{{ item.image.url }}' class='img-responsive'>
+                {% endif %}
                 <div class="caption">
                         <h3><a href='{{ item.get_absolute_url }}'>{{item.title}}</a> <small>{{ item.created | timesince }} ago</small> </h3>
                         <p>{{ item.text | linebreaks | truncatechars:120 }}</p>
