@@ -16,13 +16,10 @@ def post_create(request):
     else:
         messages.error(request, 'post is not created')
 
-    #if request.method == "POST":
-    #    print(request.POST.get("text"))
     return render(request, "post_create.html", context)
 
 
 def post_detail(request, id=None):
-    #instatnce = Post.objects.get_object_or_404(id=5)
     instance = get_object_or_404(Post, id=id)
     context = {"title":"detail",
                "instance":instance}
@@ -31,16 +28,14 @@ def post_detail(request, id=None):
 
 def post_list(request):
     queryset_list = Post.objects.all()
-    paginator = Paginator(queryset_list, 5) # Show 25 contacts per page
+    paginator = Paginator(queryset_list, 5)
     page_request_var = 'page'
     page = request.GET.get(page_request_var)
     try:
         queryset = paginator.page(page)
     except PageNotAnInteger:
-        # If page is not an integer, deliver first page.
         queryset = paginator.page(1)
     except EmptyPage:
-        # If page is out of range (e.g. 9999), deliver last page of results.
         queryset = paginator.page(paginator.num_pages)
     context = {"queryset": queryset,
               "title": "List",
